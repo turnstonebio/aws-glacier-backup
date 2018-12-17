@@ -4,7 +4,7 @@
 # March 21, 2018
 # David Hunter
 #
-# Prerequisites:
+#d`dddd Prerequisites:
 #
 # jq - pkg install jq
 # pip - pkg install pip
@@ -46,7 +46,7 @@ printf "\nEncrypting archive with available keys\n"
 if [[ -f /tmp/${datedArchiveName}.gpg ]]; then
 	printf "\nEncrypted file already exists!\n"
 else
-	gpg -e --trust-model always --recipient /tmp/${datedArchiveName}
+	gpg -e --trust-model always --recipient ${gpgRecipient} /tmp/${datedArchiveName}
 fi
 
 local retVal=$?
