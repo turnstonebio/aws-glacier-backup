@@ -26,6 +26,8 @@ https://www.gnupg.org/
 ##### bc
 https://www.gnu.org/software/bc/
 
+Additionally, this scripts assumes you have already properly configured cli access to AWS Glacier and created a vault for this purpose.
+
 ## Variables
 
 |Variable|Description|Default Value|
