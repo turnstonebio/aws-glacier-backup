@@ -4,13 +4,6 @@
 # March 21, 2018
 # David Hunter
 #
-#d`dddd Prerequisites:
-#
-# jq - pkg install jq
-# pip - pkg install pip
-# awscli - pip install awscli
-# treehash - https://github.com/jdswinbank/treehash
-# bc - if your installation doesn't have it by default
 
 ####################
 # INITIAL VARIABLES
