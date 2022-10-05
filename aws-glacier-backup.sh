@@ -16,7 +16,6 @@ chunkSize=4294967296                                                            
 chunkSizeGiB=$(($chunkSize/1073741824))
 chunkSizeMiB=$(($chunkSize/1048576))                                                # This variable included if your version of split does not support GB
 vaultName=""                                                                        # Name of AWS Glacier vault
-gpgRecipient=""                                                                     # Valid email or key id for GnuPG
 
 ############
 # FUNCTIONS
@@ -33,27 +32,6 @@ else
 fi
 }
 
-function encrypt_archive() {
-
-printf "\nEncrypting archive with available keys\n"
-if [[ -f /tmp/${datedArchiveName}.gpg ]]; then
-	printf "\nEncrypted file already exists!\n"
-else
-	gpg -e --trust-model always --recipient ${gpgRecipient} /tmp/${datedArchiveName}
-fi
-
-local retVal=$?
-if [ $retVal -ne 0 ]; then
-	printf "\nEncryption failed!\n"
-	exit 1
-else
-	sleep 1
-	mv -f /tmp/${datedArchiveName}.gpg /tmp/${datedArchiveName}
-fi
-
-archiveSize=$(wc -c "/tmp/${datedArchiveName}" | awk '{ print $1 }')
-
-}
 
 # Split the archive into $chunkSize chunks/parts, if $archiveSize is greater than 4GiB
 function split_archive() {
@@ -188,7 +166,6 @@ printf "\nClean up complete!\n"
 ###########################
 
 create_archive
-encrypt_archive
 compute_treehash
 
 # Single or multi-part upload?
